@@ -1,25 +1,75 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React, { useState } from "react";
+import SnapshotSpaces from "./components/Snapshot";
+import {
+  AppBar,
+  Box,
+  IconButton,
+  Tab,
+  Tabs,
+  Toolbar,
+  Typography,
+} from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
 
-function App() {
+const App = () => {
+  const [selectedTab, setSelectedTab] = useState(0);
+
+  const handleChange = (event, newValue) => {
+    setSelectedTab(newValue);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            Parcel Leads Generation
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <Box display={"flex"}>
+        <Box
+          boxShadow={"0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)"}
+          width={"15%"}
         >
-          Learn React
-        </a>
-      </header>
+          <Tabs
+            style={{
+              display: "flex",
+              flexDirection: "column",
+            }}
+            value={selectedTab}
+            onChange={handleChange}
+            centered
+          >
+            <Tab label="Snapshot" />
+            <Tab label="Coordinape" />
+            <Tab label="Gnosis" />
+          </Tabs>
+        </Box>
+        <Box width={"85%"} padding="16px">
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{ flexGrow: 1 }}
+            paddingBottom="16px"
+          >
+            Snapshot Daos Data
+          </Typography>
+          <SnapshotSpaces></SnapshotSpaces>
+        </Box>
+      </Box>
     </div>
   );
-}
+};
 
 export default App;
